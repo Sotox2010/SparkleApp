@@ -4,7 +4,11 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>
 
-    <color name="theme_primary">#009688</color>
-    <color name="theme_primary_dark">#00796b</color>
+    <!--<color name="theme_primary">#009688</color>
+    <color name="theme_primary_dark">#00796b</color>-->
+
+    <color name="theme_primary">#0d7aff</color>
+    <color name="theme_primary_dark">#0a5bbf</color>
+    <color name="theme_accent">#F50057</color>
 
 </resources>

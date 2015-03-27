@@ -6,11 +6,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar mToolbarActionBar;
+
+    private EditText mEndpointUrlView;
+    private EditText mSparqlQueryView;
+    private Button mExecuteQueryButton;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -23,6 +30,17 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mEndpointUrlView = (EditText) findViewById(R.id.endpoint_url_view);
+        mSparqlQueryView = (EditText) findViewById(R.id.sparql_query_view);
+        mExecuteQueryButton = (Button) findViewById(R.id.execute_button);
+
+        mExecuteQueryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 
