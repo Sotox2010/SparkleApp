@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ActionBarThemeOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="actionButtonStyle">@style/Widget.Sparkle.ActionButton</item>
+        <item name="actionOverflowButtonStyle">@style/Widget.Sparkle.ActionButton.Overflow</item>
+    </style>
+
+    <style name="Widget.Sparkle.ActionButton" parent="Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">?actionBarSize</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="Widget.Sparkle.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">?actionBarSize</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+</resources>
