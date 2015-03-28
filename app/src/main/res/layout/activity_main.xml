@@ -44,6 +44,8 @@
                     android:singleLine="true"
                     android:background="@null"
                     android:textSize="16sp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_disabled"
                     android:hint="Endpoint URL"
                     android:text="http://localhost:8080"/>
 
@@ -56,6 +58,8 @@
                     android:singleLine="true"
                     android:background="@null"
                     android:textSize="16sp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_disabled"
                     android:hint="Format"/>
 
                 <EditText
@@ -67,6 +71,8 @@
                     android:hint="SPARQL Query"
                     android:inputType="textMultiLine"
                     android:textSize="14sp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_disabled"
                     android:gravity="top"/>
 
             </LinearLayout>
