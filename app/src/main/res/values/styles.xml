@@ -18,4 +18,34 @@
         <item name="android:padding">0dp</item>
     </style>
 
+    <style name="FloatingActionButton">
+        <item name="android:layout_width">@dimen/fab_size</item>
+        <item name="android:layout_height">@dimen/fab_size</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Widget.FloatingLabelControl" parent="@android:style/Widget">
+        <item name="android:orientation">vertical</item>
+        <item name="floatingLabelTextAppearance">@style/TextAppearance.FloatingLabel</item>
+    </style>
+
+    <style name="Widget.FloatingLabelEditText" parent="@style/Widget.FloatingLabelControl">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.FloatingLabelSpinner" parent="@style/Widget.FloatingLabelControl">
+        <item name="android:background">@null</item>
+    </style>
+
+
+    <style name="TextAppearance.FloatingLabel" parent="@android:style/TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <!-- <item name="android:textColor">@color/floating_hint</item> -->
+    </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_default_background</item>
+    </style>
+
 </resources>

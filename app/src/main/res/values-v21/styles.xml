@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Sparkle.ActionButton" parent="Widget.AppCompat.ActionButton"/>
+
+    <style name="Widget.Sparkle.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow"/>
+
+    <style name="FloatingActionButton">
+        <item name="android:layout_width">@dimen/fab_size</item>
+        <item name="android:layout_height">@dimen/fab_size</item>
+        <item name="android:clickable">true</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:stateListAnimator">@anim/execute_fab_state_list_anim</item>
+    </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+    </style>
+
+</resources>

@@ -28,67 +28,80 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:showDividers="middle"
-                android:paddingBottom="56dp"
+                android:paddingBottom="64dp"
                 android:divider="@drawable/divider">
 
-                <EditText
-                    android:id="@+id/endpoint_url_view"
+                <com.jesussoto.android.sparkle.widget.FloatingLabelEditText
+                    android:id="@+id/endpoint_url"
+                    sparkle:controlId="@+id/endpoint_url_text"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingRight="16dp"
+                    android:layout_height="64dp"
                     android:paddingLeft="16dp"
-                    android:inputType="textUri"
-                    android:singleLine="true"
-                    android:background="@null"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_primary"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/text_primary_selector"
                     android:textColorHint="@color/text_disabled"
+                    android:textSize="16sp"
+                    android:inputType="textUri"
+                    android:gravity="center_vertical"
                     android:hint="Endpoint URL"
                     android:text="http://localhost:8080"/>
 
-                <EditText
-
+                <com.jesussoto.android.sparkle.widget.FloatingLabelSpinner
+                    style="@style/SpinnerStyle"
+                    android:id="@+id/format_spinner"
+                    sparkle:controlId="@+id/format_spinner_control"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingRight="16dp"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    sparkle:floatingLabelText="Result format"/>
+
+                <com.jesussoto.android.sparkle.widget.FloatingLabelEditText
+                    android:id="@+id/sparql_query"
+                    sparkle:controlId="@+id/sparql_query_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
                     android:paddingLeft="16dp"
-                    android:singleLine="true"
-                    android:background="@null"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_primary"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/text_primary_selector"
                     android:textColorHint="@color/text_disabled"
-                    android:hint="Format"/>
-
-                <EditText
-                    android:id="@+id/sparql_query_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp"
-                    android:background="@null"
-                    android:hint="SPARQL Query"
-                    android:inputType="textMultiLine"
                     android:textSize="14sp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_disabled"
-                    android:gravity="top"/>
+                    android:hint="SPARQL Query"/>
 
             </LinearLayout>
 
         </ScrollView>
 
-        <Button
-            android:id="@+id/execute_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Execute Query"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_gravity="center_horizontal|bottom"
-            android:textColor="@color/white"/>
+        <FrameLayout
+            style="@style/FloatingActionButton"
+            android:id="@+id/execute_fab"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/execute_fab_background">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_execute"
+                android:visibility="visible"/>
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:theme="@style/ProgressBarTheme"
+                android:id="@+id/progressbar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
 
     </FrameLayout>
 
