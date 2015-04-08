@@ -1,9 +1,12 @@
 package com.jesussoto.android.sparkle.sync;
 
 
+import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Query;
 import retrofit.http.Body;
+import retrofit.mime.TypedOutput;
 
 public interface WebServiceApi {
 
@@ -21,10 +24,11 @@ public interface WebServiceApi {
     public String query(@Body String sparqlQuery);
 
     @POST(PATH_QUERY)
-    public String query(@Body String sparqlQuery, @Query(PARAM_FORMAT) String format);
+    @Headers({"Content-Type: text/plain"})
+    public String query(@Body TypedOutput sparqlQuery, @Query(PARAM_FORMAT) int format);
 
     @POST(PATH_QUERY_DOWNLOAD)
-    public String queryDownload(@Body String sparqlQuery, @Query(PARAM_FORMAT) String format);
+    public String queryDownload(@Body TypedOutput sparqlQuery, @Query(PARAM_FORMAT) int format);
 
     @POST(PATH_DOWNLOAD_RESULT)
     public void downloadResults(@Body String url);

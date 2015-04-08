@@ -47,7 +47,7 @@
                     android:inputType="textUri"
                     android:gravity="center_vertical"
                     android:hint="Endpoint URL"
-                    android:text="http://localhost:8080"/>
+                    android:text="http://10.0.3.2:8080"/>
 
                 <com.jesussoto.android.sparkle.widget.FloatingLabelSpinner
                     style="@style/SpinnerStyle"

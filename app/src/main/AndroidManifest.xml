@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jesussoto.android.sparkle" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,9 +20,17 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.SparkleService"/>
-            <!--android:exported="true"
-            android:process=":sparkle"/>-->
+        <activity android:name="com.jesussoto.android.sparkle.ResultsActivity"
+            android:label="@string/activity_results"
+            android:parentActivityName="com.jesussoto.android.sparkle.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jesussoto.android.sparkle.MainActivity" />
+        </activity>
+
+        <service android:name=".service.SparkleService"
+            android:exported="true"
+            android:process=":sparkle_service"/>
 
     </application>
 

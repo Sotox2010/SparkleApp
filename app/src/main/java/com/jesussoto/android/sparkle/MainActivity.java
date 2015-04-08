@@ -8,17 +8,21 @@ import android.content.ServiceConnection;
 import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.jesussoto.android.sparkle.service.SparkleService;
 import com.jesussoto.android.sparkle.widget.FloatingLabelEditText;
@@ -29,6 +33,8 @@ import java.util.Arrays;
 
 public class MainActivity extends ActionBarActivity {
 
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     public static final String[] RESULT_FORMATS = {
             "RDF/XML",
             "RDF/XML-ABBREV",
@@ -38,17 +44,62 @@ public class MainActivity extends ActionBarActivity {
             "N3"
     };
 
+    static final int MSG_SAY_HELLO = 1;
+    static final int MSG_EXECUTE_QUERY = 2;
+    static final int MSG_EXECUTE_QUERY_DOWNLOAD = 3;
+    static final int MSG_DUMP = 4;
+
+    static final int MSG_DELIVER_RESULT = 1;
+    static final int MSG_ERROR = 2;
+
+    static final String ARG_ENDPOINT_URL = "endpoint_url";
+    static final String ARG_FORMAT = "format";
+    static final String ARG_SPARQL_QUERY = "sparql_query";
+
+    static final String DATA_QUERY_RESULT= "query_result";
+    static final String DATA_ERROR_MESSAGE = "error_message";
+
     private Toolbar mToolbarActionBar;
     private FloatingLabelEditText mEndpointUrlView;
     private FloatingLabelEditText mSparqlQueryView;
     private FloatingLabelSpinner mFormatSpinner;
-    private View mExecuteQueryFab;
 
     /** Messenger for communicating with the service. */
     Messenger mService = null;
 
     /** Flag indicating whether we have called bind on the service. */
     boolean mBound;
+
+    /**
+     * Handler for Service response messages.
+     */
+    class ResponseHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_DELIVER_RESULT: {
+                    Bundle result = msg.getData();
+                    Log.i(LOG_TAG, "MSG_DELIVER_RESULT");
+                    Log.i(LOG_TAG, result.getString(DATA_QUERY_RESULT));
+
+                    Intent intent = new Intent(MainActivity.this, ResultsActivity.class);
+                    intent.putExtra(ResultsActivity.EXTRA_RESULT, result.getString(DATA_QUERY_RESULT));
+                    startActivity(intent);
+                    break;
+                }
+                case MSG_ERROR: {
+                    Bundle result = msg.getData();
+                    Log.e(LOG_TAG, "MSG_ERROR");
+                    Log.e(LOG_TAG, result.getString(DATA_ERROR_MESSAGE));
+                    break;
+                }
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+
+    private Messenger mMessenger = new Messenger(new ResponseHandler());
 
     /**
      * Class for interacting with the main interface of the service.
@@ -87,20 +138,17 @@ public class MainActivity extends ActionBarActivity {
         mEndpointUrlView = (FloatingLabelEditText) findViewById(R.id.endpoint_url);
         mFormatSpinner = (FloatingLabelSpinner) findViewById(R.id.format_spinner);
         mSparqlQueryView = (FloatingLabelEditText) findViewById(R.id.sparql_query);
-        mExecuteQueryFab = findViewById(R.id.execute_fab);
 
-        mExecuteQueryFab.setOnClickListener(new View.OnClickListener() {
+        View executeQueryFab = findViewById(R.id.execute_fab);
+        executeQueryFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mBound) return;
-
-                Message msg = msg
-                mService.send();
+                sendExecuteQueryMessage();
             }
         });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mExecuteQueryFab.setOutlineProvider(new ViewOutlineProvider() {
+            executeQueryFab.setOutlineProvider(new ViewOutlineProvider() {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void getOutline(View view, Outline outline) {
@@ -157,7 +205,20 @@ public class MainActivity extends ActionBarActivity {
     private void sendExecuteQueryMessage() {
         if (!mBound) return;
 
+        Bundle args = new Bundle();
+        args.putString(ARG_ENDPOINT_URL, mEndpointUrlView.getText().toString());
+        args.putInt(ARG_FORMAT, mFormatSpinner.getSelectedItemPosition());
+        args.putString(ARG_SPARQL_QUERY, mSparqlQueryView.getText().toString());
+
         Message msg = new Message();
-        msg.
+        msg.what = MSG_EXECUTE_QUERY;
+        msg.replyTo = mMessenger;
+        msg.setData(args);
+
+        try {
+            mService.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }
