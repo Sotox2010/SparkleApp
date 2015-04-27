@@ -70,7 +70,8 @@
                     android:textColor="@color/text_primary_selector"
                     android:textColorHint="@color/text_disabled"
                     android:textSize="14sp"
-                    android:hint="SPARQL Query"/>
+                    android:hint="SPARQL Query"
+                    sparkle:typeface="SourceCodePro-Regular.ttf"/>
 
             </LinearLayout>
 

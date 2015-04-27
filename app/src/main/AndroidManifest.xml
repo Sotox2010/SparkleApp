@@ -3,6 +3,7 @@
     package="com.jesussoto.android.sparkle" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.jesussoto.android.sparkleservice.permission.SPARKLE"/>
 
     <application
         android:allowBackup="true"
@@ -28,9 +29,20 @@
                 android:value="com.jesussoto.android.sparkle.MainActivity" />
         </activity>
 
-        <service android:name=".service.SparkleService"
+        <!--<service android:name=".service.SparkleService"
             android:exported="true"
-            android:process=":sparkle_service"/>
+            android:process=":sparkle_service">
+            <intent-filter>
+                <action android:name="com.jesussoto.android.sparkle.action.BIND"/>
+            </intent-filter>
+        </service>-->
+
+        <receiver android:name=".receiver.QueryResultDownloadReceiver">
+            <intent-filter>
+                <action android:name="com.android.sparkleservice.intent.action.QUERY_RESULT_DOWNLOAD_COMPLETE"/>
+                <action android:name="com.android.sparkleservice.intent.action.QUERY_RESULT_DOWNLOAD_FAILURE"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 

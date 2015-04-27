@@ -5,6 +5,13 @@
     <attr name="floatingLabelTextAppearance" format="reference"/>
     <attr name="floatingLabelColor" format="reference|color"/>
 
+    <attr name="floatingLabelControlStyle" format="reference"/>
+    <attr name="floatingLabelEditTextStyle" format="reference"/>
+    <attr name="floatingLabelSpinnerStyle" format="reference"/>
+    <attr name="floatingLabelButtonStyle" format="reference"/>
+
+    <attr name="typeface" format="string"/>
+
     <declare-styleable name="FloatingLabelControl">
         <attr name="controlId"/>
         <attr name="floatingLabelTextAppearance"/>
@@ -22,6 +29,7 @@
         <attr name="android:textAppearance"/>
         <attr name="android:textSize"/>
         <attr name="android:inputType"/>
+        <attr name="typeface"/>
     </declare-styleable>
 
     <declare-styleable name="FloatingHintButton">
@@ -30,9 +38,9 @@
         <attr name="android:textAppearance"/>
     </declare-styleable>
 
-    <attr name="floatingLabelControlStyle" format="reference"/>
-    <attr name="floatingLabelEditTextStyle" format="reference"/>
-    <attr name="floatingLabelSpinnerStyle" format="reference"/>
-    <attr name="floatingLabelButtonStyle" format="reference"/>
+    <declare-styleable name="FontTextView">
+        <attr name="typeface"/>
+    </declare-styleable>
+
 
 </resources>

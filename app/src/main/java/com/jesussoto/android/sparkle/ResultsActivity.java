@@ -10,13 +10,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.jesussoto.android.sparkle.widget.FontTextView;
+
 import java.text.RuleBasedCollator;
+import java.util.ArrayList;
 
 public class ResultsActivity extends ActionBarActivity {
 
     public static final String EXTRA_RESULT = "extra_result";
 
-    private TextView mResultsView;
+    private FontTextView mResultsView;
     private Handler mHandler= new Handler();
 
     @Override
@@ -34,7 +37,7 @@ public class ResultsActivity extends ActionBarActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        mResultsView = (TextView) findViewById(R.id.results);
+        mResultsView = (FontTextView) findViewById(R.id.results);
         mResultsView.setText(extras.getString(EXTRA_RESULT));
     }
 

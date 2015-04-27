@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.jesussoto.android.sparkle.R;
+import com.jesussoto.android.sparkle.util.FontUtils;
 
 
 public class FloatingLabelEditText extends FloatingLabelControl<EditText> {
@@ -84,6 +85,11 @@ public class FloatingLabelEditText extends FloatingLabelControl<EditText> {
             int textGravity = a.getInteger(R.styleable.FloatingLabelEditText_textGravity, -1);
             if (textGravity != -1) {
                 mEditText.setGravity(textGravity);
+            }
+
+            String typefaceName = a.getString(R.styleable.FloatingLabelEditText_typeface);
+            if (typefaceName != null) {
+                FontUtils.setTypeface(mEditText, typefaceName);
             }
 
             a.recycle();
